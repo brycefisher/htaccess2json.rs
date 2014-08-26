@@ -1,0 +1,12 @@
+.DS_Store
+deps/
+/target/
+/doc/
+*.swp
+*.rlib
+*.dylib
+*.dSYM
+*~
+*.o
+*.so
+*-test

@@ -1,0 +1,9 @@
+[package]
+
+name = "htaccess2json"
+version = "0.0.1"
+authors = ["Bryce Fisher-Fleig <bfisher-fleig@brightcove.com>"]
+
+[dependencies.url]
+
+git = "https://github.com/servo/rust-url.git"
