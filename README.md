@@ -64,11 +64,7 @@ I intend to incorporate this data from several domains/servers into a single "re
  * No support for RewriteCond at the moment (these are simply skipped)
  * No support for replacements in the destination (Ex: $1)
  * Must provide a domain at the command line
- * Supported flags are:
- ** R=301
- ** L
- ** R=302
- ** QSA
+ * Supported flags are: R=301, L, R=302, QSA
 
 ## Contributions Welcome! 
 
