@@ -4,19 +4,19 @@ htaccess2json [![Build Status](https://travis-ci.org/brycefisher/htaccess2json.r
 Parses simple mod_rewrite directives like this:
 
 ```
-\# Old.com
+# Old.com
 RewriteRule /old.html http://example.com/new [R=301,L]
 RewriteRule /old/*.html http://example.com/new [R=301,L,QSA]
 RewriteRule .* http://new.com [R=302,L]
 ```
 
-It produces a json file like this:
+into json like this
 
 ```javascript
 [{
-  "pattern":"/old.html", "dest":"http://example.com/new", "flags":["R=301","L"],"domain":"old.com"
+  "pattern":"/old.html", "dest":"http://example.com/new", "flags":["R=301","L"], "domain":"old.com"
 },{
-  "pattern":"/old/*.html", "dest":"http://example.com/new", "flags":["R=301","L","QSA"]. "domain":"old.com"
+  "pattern":"/old/*.html", "dest":"http://example.com/new", "flags":["R=301","L","QSA"], "domain":"old.com"
 },{
   "pattern":".*", "dest":"http://new.com", "flags":["R=302","L"], "domain":"old.com"
 }]
@@ -52,10 +52,26 @@ Saved to disk. 178 rules captured, 2 rules skipped.
 
 All options are required.
 
+## Intended Use Case
+
+If you have a large collection of redirect rules that you want to preserve (for SEO or whatever), but you want to move off Apache, it can take a lot of time to sift through the RewriteRules. Capturing a representation of this information as JSON should make it easy to port to a Node web app, or any other platform that can parse JSON easily.
+
+I intend to incorporate this data from several domains/servers into a single "redirect server" which handles all the old domains.
+
 ## Limitations
 
  * Only RewriteRule directives are parsed
  * No support for RewriteCond at the moment (these are simply skipped)
  * No support for replacements in the destination (Ex: $1)
- * Must be a domain at the command line
+ * Must provide a domain at the command line
+ * Supported flags are:
+ ** R=301
+ ** L
+ ** R=302
+ ** QSA
 
+## Contributions Welcome! 
+
+<a href="https://flattr.com/submit/auto?user_id=brycefisherfleig&url=https%3A%2F%2Fgithub.com%2Fbrycefisher%2Fhtaccess2json.rs" target="_blank"><img src="//api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+
+If you find this software useful, consider flattring. Pull requests and issues welcome as well.
