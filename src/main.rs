@@ -192,11 +192,10 @@ fn parse_rewrite_rules(domain: String, file: String) -> Result<(Vec<RewriteRule>
 }
 
 // TODO write to file
-fn write_data(data: &Vec<RewriteRule>, _output: String) -> IoResult<()> {
+fn write_data(data: &Vec<RewriteRule>, output: String) -> IoResult<()> {
   let json_obj: json::Json = data.to_json();
   let json_str: String = json_obj.to_string();
-  println!("data: {}", json_str.as_slice());
-  Ok(())
+  File::create(&Path::new(output)).write_str(json_str.as_slice())
 }
 
 fn main() {
