@@ -56,7 +56,7 @@ impl ToJson for RewriteFlag {
 struct RewriteRule {
   domain: String,
   pattern: Regex,
-  flags: Option<Vec<RewriteFlag>>,
+  flags: Vec<RewriteFlag>,
   dest: Url
 }
 
@@ -112,6 +112,28 @@ fn validate_input(args:Vec<String>) -> IoResult<Context> {
   })
 }
 
+fn parse_flags(rawflags: String) -> Result<Vec<RewriteFlag>, ParseError> {
+  // Check for no flags (Ex: [])
+  if rawflags.is_empty() {
+    return Ok(vec!());
+  }
+
+  let re = regex!(r"[^],\[]+");
+  let mut flags: Vec<RewriteFlag> = vec!();
+  for flag in re.captures_iter(rawflags.as_slice()) {
+    flags.push(match flag.at(0) {
+      "R=301" => Redirect301,
+      "R=302" => Redirect302,
+      "L" => Last,
+      "QSA" => QueryStringAppend,
+      _ => return Err(BadFlag) 
+    });
+  }
+
+  Ok(flags)
+}
+
+
 // TODO: Break this out into a separate module/file
 // TODO: return ParseErrors EVERY time something bad happens
 fn parse_rewrite_rules(domain: String, file: String) -> Result<(Vec<RewriteRule>, uint), ParseError> {
@@ -140,7 +162,7 @@ fn parse_rewrite_rules(domain: String, file: String) -> Result<(Vec<RewriteRule>
                 rules.push(RewriteRule {
                   domain: domain.clone(),
                   pattern: Regex::new(parts[1]).unwrap(),
-                  flags: None,
+                  flags: vec!(),
                   dest: Url::parse(parts[2]).ok().expect(format!("Invalid destination url on line {}", l).as_slice())
                 })
               },
@@ -149,7 +171,7 @@ fn parse_rewrite_rules(domain: String, file: String) -> Result<(Vec<RewriteRule>
                   domain: domain.clone(),
                   pattern: Regex::new(parts[1]).unwrap(),
                   // TODO: Implement Flag parsing
-                  flags: None,
+                  flags: try!(parse_flags(parts[3].to_string())),
                   dest: Url::parse(parts[2]).ok().expect(format!("Invalid destination url on line {}", l).as_slice())
                 })
               },
