@@ -113,11 +113,6 @@ fn validate_input(args:Vec<String>) -> IoResult<Context> {
 }
 
 fn parse_flags(rawflags: String) -> Result<Vec<RewriteFlag>, ParseError> {
-  // Check for no flags (Ex: [])
-  if rawflags.is_empty() {
-    return Ok(vec!());
-  }
-
   let re = regex!(r"[^],\[]+");
   let mut flags: Vec<RewriteFlag> = vec!();
   for flag in re.captures_iter(rawflags.as_slice()) {
@@ -129,13 +124,11 @@ fn parse_flags(rawflags: String) -> Result<Vec<RewriteFlag>, ParseError> {
       _ => return Err(BadFlag) 
     });
   }
-
   Ok(flags)
 }
 
 
 // TODO: Break this out into a separate module/file
-// TODO: return ParseErrors EVERY time something bad happens
 fn parse_rewrite_rules(domain: String, file: String) -> Result<(Vec<RewriteRule>, uint), ParseError> {
   let contents = File::open(&Path::new(file.as_slice())).read_to_string().unwrap();
   let lines: Vec<&str> = contents.as_slice().lines_any().collect();
@@ -170,7 +163,6 @@ fn parse_rewrite_rules(domain: String, file: String) -> Result<(Vec<RewriteRule>
                 rules.push(RewriteRule {
                   domain: domain.clone(),
                   pattern: Regex::new(parts[1]).unwrap(),
-                  // TODO: Implement Flag parsing
                   flags: try!(parse_flags(parts[3].to_string())),
                   dest: Url::parse(parts[2]).ok().expect(format!("Invalid destination url on line {}", l).as_slice())
                 })
@@ -191,7 +183,6 @@ fn parse_rewrite_rules(domain: String, file: String) -> Result<(Vec<RewriteRule>
   Ok((rules, skipped))
 }
 
-// TODO write to file
 fn write_data(data: &Vec<RewriteRule>, output: String) -> IoResult<()> {
   let json_obj: json::Json = data.to_json();
   let json_str: String = json_obj.to_string();

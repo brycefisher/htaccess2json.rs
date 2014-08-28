@@ -1,4 +1,4 @@
-htaccess2json [![Build Status](https://travis-ci.org/brycefisher/htaccess2json.rs.svg)](https://travis-ci.org/brycefisher/htaccess2json.rs)
+htaccess2json [![Build Status](https://travis-ci.org/brycefisher/htaccess2json.rs.svg)](https://travis-ci.org/brycefisher/htaccess2json.rs) [![Flattr this](https://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=brycefisherfleig&url=https%3A%2F%2Fgithub.com%2Fbrycefisher%2Fhtaccess2json.rs)
 =============
 
 Parses simple mod_rewrite directives like this:
@@ -14,11 +14,20 @@ into json like this
 
 ```javascript
 [{
-  "pattern":"/old.html", "dest":"http://example.com/new", "flags":["R=301","L"], "domain":"old.com"
+  "pattern":"/old.html",
+  "dest":"http://example.com/new",
+  "flags":["R=301","L"],
+  "domain":"old.com"
 },{
-  "pattern":"/old/*.html", "dest":"http://example.com/new", "flags":["R=301","L","QSA"], "domain":"old.com"
+  "pattern":"/old/*.html",
+  "dest":"http://example.com/new",
+  "flags":["R=301","L","QSA"],
+  "domain":"old.com"
 },{
-  "pattern":".*", "dest":"http://new.com", "flags":["R=302","L"], "domain":"old.com"
+  "pattern":".*",
+  "dest":"http://new.com",
+  "flags":["R=302","L"],
+  "domain":"old.com"
 }]
 ```
 
@@ -66,8 +75,6 @@ I intend to incorporate this data from several domains/servers into a single "re
  * Must provide a domain at the command line
  * Supported flags are: R=301, L, R=302, QSA
 
-## Contributions Welcome! 
-
-<a href="https://flattr.com/submit/auto?user_id=brycefisherfleig&url=https%3A%2F%2Fgithub.com%2Fbrycefisher%2Fhtaccess2json.rs" target="_blank"><img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+## Contributions Welcome! [![Flattr this](https://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=brycefisherfleig&url=https%3A%2F%2Fgithub.com%2Fbrycefisher%2Fhtaccess2json.rs)
 
 If you find this software useful, consider flattring. Pull requests and issues welcome as well.
