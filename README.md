@@ -55,7 +55,7 @@ $ htaccess2json -i input -o output -d domain
 Saved to disk. 178 rules captured, 2 rules skipped.
 ```
 
- * **-i** the input file, usually `.htaccess`. Since I often need to edit .htaccess, I recommend copying your htaccess so that you safely modify it.
+ * **-i** the input file, usually `.htaccess`. Since I often need to edit .htaccess, I recommend copying your htaccess so that you can safely modify it if you hit an edge case.
  * **-o** output file, usually ending in `.json`
  * **-d** domain name for the site using the htaccess rule. 
 
