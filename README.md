@@ -35,7 +35,7 @@ into json like this
 
 ```bash
 $ curl https://static.rust-lang.org/rustup.sh | sudo sh
-$ git clone https://github.com/brycefisher/htaccess2json.rs.git && htaccess2json.rs
+$ git clone https://github.com/brycefisher/htaccess2json.rs.git && cd htaccess2json.rs
 $ cargo build
 $ ./target/htaccess2json
 ```
