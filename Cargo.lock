@@ -2,19 +2,19 @@
 name = "htaccess2json"
 version = "0.0.1"
 dependencies = [
- "url 0.1.0 (git+https://github.com/servo/rust-url.git#2af8160a2b06c6cfc206b5ab37c4eefefbacf555)",
+ "url 0.1.0 (git+https://github.com/servo/rust-url.git#bb68de835ad945a72fba44979944a587ba83941a)",
 ]
 
 [[package]]
 name = "encoding"
 version = "0.1.0"
-source = "git+https://github.com/lifthrasiir/rust-encoding#7e7950ddbd46428a439db3e2594fa78f0972ef2e"
+source = "git+https://github.com/lifthrasiir/rust-encoding#a44501c7d87dec0a8071053a57c1213b33195ee9"
 
 [[package]]
 name = "url"
 version = "0.1.0"
-source = "git+https://github.com/servo/rust-url.git#2af8160a2b06c6cfc206b5ab37c4eefefbacf555"
+source = "git+https://github.com/servo/rust-url.git#bb68de835ad945a72fba44979944a587ba83941a"
 dependencies = [
- "encoding 0.1.0 (git+https://github.com/lifthrasiir/rust-encoding#7e7950ddbd46428a439db3e2594fa78f0972ef2e)",
+ "encoding 0.1.0 (git+https://github.com/lifthrasiir/rust-encoding#a44501c7d87dec0a8071053a57c1213b33195ee9)",
 ]
 
