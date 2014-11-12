@@ -121,7 +121,7 @@ fn parse_flags(rawflags: String) -> Result<Vec<RewriteFlag>, ParseError> {
       "R=302" => Redirect302,
       "L" => Last,
       "QSA" => QueryStringAppend,
-      _ => return Err(BadFlag) 
+      _ => return Err(BadFlag)
     });
   }
   Ok(flags)
@@ -192,7 +192,7 @@ fn write_data(data: &Vec<RewriteRule>, output: String) -> IoResult<()> {
 fn main() {
   match validate_input(os::args()) {
     Err(e) => println!("Invalid input: {}", e),
-    Ok(context) => { 
+    Ok(context) => {
       match parse_rewrite_rules(context.domain, context.input) {
         Err(e) => println!("Error parsing htaccess: {}", e),
         Ok((ref rules, skipped)) => {
